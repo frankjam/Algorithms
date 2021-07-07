@@ -1,7 +1,23 @@
 #include <iostream>
 using namespace std;
 int partation(int arr[],int start,int end){
-    int pIndex,pivot;
+        
+    int pivot = arr[end];
+    int pIndex = start;
+    
+    for(int i = start; i<end; i++){
+        if(arr[i]<pivot){
+            int temp = arr[i];
+            arr[i] = arr[pIndex];
+            arr[pIndex] = temp;
+            pIndex++;
+        }
+    }
+    
+    int temp = arr[end];
+    arr[end] = arr[pIndex];
+    arr[pIndex] = temp;
+    
     return pIndex;
 }
 
@@ -25,17 +41,27 @@ int main(){
     return 0;
 }
 /*
-partation(){
-    if(s<e){
-        
+Time Complexity: θ(nlog(n))
+Space Complexity: O(log(n))
+
+    The pseudocode flow 
+    
+partation(arr[],start,end){
+    pivot=arr[end]
+    pIndex=start
+    for(i=start to end-1){
+        if(arr[i]<=pivot){
+            swap(arr[i],arr[pIndex])
+            pIndex++
+        }
     }
-    swap()
+    swap(arr[e],arr[pIndex])
     return pIndex;
 }
 
 quicksort(array,start,end){
     if(start<end){
-        p=partation()
+        p=partation(arr[],start,end)
         quicksort(arr,start,p-1)
         quicksort(arr,p+1,end)
     }
